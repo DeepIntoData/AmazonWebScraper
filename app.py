@@ -23,7 +23,7 @@ def foo():
     bar = request.form['test']
     
     URL = "http://www.amazon.com/"
-    NUMBER_OF_PAGES_TO_SEARCH = 5
+    NUMBER_OF_PAGES_TO_SEARCH = 3
     QUESTION_PRODUCT = "What are you looking for?\n:"
     search_term = str(bar) #PASS USER INPUT FROM HTML TO HERE
 
@@ -75,7 +75,7 @@ def foo():
                         Exception()
                         prev_price = price
                 except:
-                    print("exception")
+                    # print("exception")
                     should_add = False
                 product = Product(name, price, prev_price, link)
                 if should_add:
