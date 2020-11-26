@@ -23,7 +23,7 @@ def foo():
     bar = request.form['test']
     
     URL = "http://www.amazon.com/"
-    NUMBER_OF_PAGES_TO_SEARCH = 3
+    NUMBER_OF_PAGES_TO_SEARCH = 1
     QUESTION_PRODUCT = "What are you looking for?\n:"
     search_term = str(bar) #PASS USER INPUT FROM HTML TO HERE
 
