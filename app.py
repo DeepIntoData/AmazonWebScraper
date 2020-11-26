@@ -8,13 +8,6 @@ from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from product import Product
 from utils import convert_price_toNumber
-from web_driver_conf import get_web_driver_options
-from web_driver_conf import get_chrome_web_driver
-from web_driver_conf import set_ignore_certificate_error
-from web_driver_conf import set_browser_as_incognito
-from web_driver_conf import set_automation_as_head_less
-
-#from price_scraper import FUNCTION NAME
 
 app = Flask(__name__)
 
@@ -45,11 +38,10 @@ def foo():
     options.add_argument("--headless")
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--no-sandbox")
-    options.add_argument('--ignore-certificate-errors')
-    options.add_argument('--incognito')
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
 
     driver.get(URL)
+
     element = driver.find_element_by_xpath('//*[@id="twotabsearchtextbox"]')
     element.send_keys(search_term)
     element.send_keys(Keys.ENTER)
@@ -125,6 +117,9 @@ def foo():
     options = webdriver.ChromeOptions()
     options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     options.add_argument('--ignore-certificate-errors')
+    options.add_argument("--headless")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--no-sandbox")
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
 
     driver.get(best_deal_product.link)
