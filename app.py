@@ -121,8 +121,8 @@ def foo():
     # options.add_argument('--ignore-certificate-errors')
     # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
 
-    driver.get(best_deal_product.link)
-    driver.find_element_by_tag_name('body').send_keys(Keys.COMMAND + 't')
+    # driver.get(best_deal_product.link)
+    # driver.find_element_by_tag_name('body').send_keys(Keys.COMMAND + 't')
 
     return jsonify(data)
 
