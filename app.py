@@ -1,7 +1,6 @@
 from flask import Flask, request, render_template, jsonify
 import requests 
 import json
-import os
 
 from selenium import webdriver
 
@@ -20,6 +19,9 @@ def index():
 @app.route('/get-text', methods=['GET', 'POST'])
 def foo():
 
+    GOOGLE_CHROME_PATH = '/app/.apt/usr/bin/google_chrome'
+    CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver'
+
     bar = request.form['test']
     
     URL = "http://www.amazon.com/"
@@ -33,14 +35,17 @@ def foo():
     best_deal_product = Product("", "", "", "")
     search_terms = search_term.split(" ")
 
-    options = webdriver.ChromeOptions()
-    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    options.add_argument('--ignore-certificate-errors')
-    options.add_argument("--headless")
-    options.add_argument('--incognito')
-    options.add_argument("--disable-dev-shm-usage")
-    options.add_argument("--no-sandbox")
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
+    chrome_options = webdriver.ChromeOptions()
+    
+    chrome_options.add_argument("disable-dev-shm-usage")
+    # chrome_options.add_argument('--headless')
+    # chrome_options.add_argument('--ignore-certificate-errors')
+    # chrome_options.add_argument('--incognito')
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.binary_location = GOOGLE_CHROME_PATH
+
+    driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
 
     driver.get(URL)
 
@@ -121,8 +126,19 @@ def foo():
     # options.add_argument('--ignore-certificate-errors')
     # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
 
-    # driver.get(best_deal_product.link)
-    # driver.find_element_by_tag_name('body').send_keys(Keys.COMMAND + 't')
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.add_argument("disable-dev-shm-usage")
+    # chrome_options.add_argument('--headless')
+    # chrome_options.add_argument('--ignore-certificate-errors')
+    # chrome_options.add_argument('--incognito')
+    chrome_options.add_argument('--disable-gpu')
+    chrome_options.add_argument('--no-sandbox')
+    chrome_options.binary_location = GOOGLE_CHROME_PATH
+
+    driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
+
+    driver.get(best_deal_product.link)
+    driver.find_element_by_tag_name('body').send_keys(Keys.COMMAND + 't')
 
     return jsonify(data)
 
