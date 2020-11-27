@@ -4,6 +4,7 @@ import json
 import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.chrome.options import Options
 from product import Product
 from utils import convert_price_toNumber
 
@@ -34,13 +35,13 @@ def foo():
     search_terms = search_term.split(" ")
 
 
-    options = webdriver.ChromeOptions()
+    options = Options()
     options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    options.add_argument("--headless")
     options.add_argument("--no-sandbox")
+    options.add_argument("--headless")
     options.add_argument("--disable-dev-shm-usage")
 
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
 
     # chrome_options = webdriver.ChromeOptions()
     # chrome_options.binary_location = GOOGLE_CHROME_BIN
@@ -99,6 +100,8 @@ def foo():
             break
         # print(page)
     run = 0
+
+    driver.quit() ####
 
     for product in products:
         not_right = False
