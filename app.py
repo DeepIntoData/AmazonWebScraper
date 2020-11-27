@@ -88,12 +88,12 @@ def foo():
                         Exception()
                         prev_price = price
                 except:
-                    # print("exception")
+                    #print("exception")
                     should_add = False
                 product = Product(name, price, prev_price, link)
                 if should_add:
                     products.append(product)
-                    # print(products)
+                    print(products)
                 counter = counter + 1
         page = page - 1
         if page == 0:
@@ -101,7 +101,7 @@ def foo():
         # print(page)
     run = 0
 
-    driver.quit() ####
+    ##driver.quit() ####
 
     for product in products:
         not_right = False
@@ -152,6 +152,7 @@ def foo():
     # driver.get(best_deal_product.link)
     # driver.find_element_by_tag_name('body').send_keys(Keys.COMMAND + 't')
 
+    driver.quit()
     return jsonify(data)
 
 if __name__ == '__main__':
