@@ -25,7 +25,7 @@ def foo():
     bar = request.form['test']
     
     URL = "http://www.amazon.com/"
-    NUMBER_OF_PAGES_TO_SEARCH = 1
+    NUMBER_OF_PAGES_TO_SEARCH = 3
     QUESTION_PRODUCT = "What are you looking for?\n:"
     search_term = str(bar) #PASS USER INPUT FROM HTML TO HERE
 
@@ -39,7 +39,7 @@ def foo():
     
     chrome_options.add_argument("disable-dev-shm-usage")
     # chrome_options.add_argument('--headless')
-    # chrome_options.add_argument('--ignore-certificate-errors')
+    chrome_options.add_argument('--ignore-certificate-errors')
     # chrome_options.add_argument('--incognito')
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--no-sandbox')
@@ -129,7 +129,7 @@ def foo():
     chrome_options = webdriver.ChromeOptions()
     chrome_options.add_argument("disable-dev-shm-usage")
     # chrome_options.add_argument('--headless')
-    # chrome_options.add_argument('--ignore-certificate-errors')
+    chrome_options.add_argument('--ignore-certificate-errors')
     # chrome_options.add_argument('--incognito')
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--no-sandbox')
