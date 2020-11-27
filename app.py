@@ -101,7 +101,7 @@ def foo():
         # print(page)
     run = 0
 
-    ##driver.quit() ####
+    driver.quit() ####
 
     for product in products:
         not_right = False
@@ -152,7 +152,7 @@ def foo():
     # driver.get(best_deal_product.link)
     # driver.find_element_by_tag_name('body').send_keys(Keys.COMMAND + 't')
 
-    driver.quit()
+    ##driver.quit()
     return jsonify(data)
 
 if __name__ == '__main__':
