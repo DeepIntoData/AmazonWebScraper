@@ -3,6 +3,7 @@ import requests
 import json
 import os
 from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
 from product import Product
 from utils import convert_price_toNumber
 
