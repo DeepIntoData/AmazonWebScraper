@@ -4,9 +4,10 @@ import json
 import os
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.options import Options
+#from selenium.webdriver.chrome.options import Options
 from product import Product
 from utils import convert_price_toNumber
+import time
 
 app = Flask(__name__)
 
@@ -35,13 +36,15 @@ def foo():
     search_terms = search_term.split(" ")
 
 
-    options = Options()
+    options = webdriver.ChromeOptions()
     options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     options.add_argument("--no-sandbox")
     options.add_argument("--headless")
     options.add_argument("--disable-dev-shm-usage")
+    options.add_argument('--ignore-certificate-errors')
+    options.add_argument('--disable-gpu')
 
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=options)
 
     # chrome_options = webdriver.ChromeOptions()
     # chrome_options.binary_location = GOOGLE_CHROME_BIN
@@ -56,6 +59,8 @@ def foo():
     # driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
 
     driver.get("http://www.amazon.com/")
+    
+    time.sleep(5)
 
     element = driver.find_element_by_xpath('//*[@id="twotabsearchtextbox"]')
     element.send_keys(search_term)
