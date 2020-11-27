@@ -3,7 +3,6 @@ import requests
 import json
 import os
 from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
 from product import Product
 from utils import convert_price_toNumber
 
@@ -23,9 +22,8 @@ def foo():
 
     bar = request.form['test']
     
-    URL = "http://www.amazon.com/"
-    NUMBER_OF_PAGES_TO_SEARCH = 3
-    QUESTION_PRODUCT = "What are you looking for?\n:"
+    NUMBER_OF_PAGES_TO_SEARCH = 1
+
     search_term = str(bar) #PASS USER INPUT FROM HTML TO HERE
 
     biggest_discount = 0.0
@@ -38,13 +36,10 @@ def foo():
     chrome_options = webdriver.ChromeOptions()
     chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-
-
-
-
 
     # chrome_options = webdriver.ChromeOptions()
     # chrome_options.binary_location = GOOGLE_CHROME_BIN
@@ -58,7 +53,7 @@ def foo():
 
     # driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
 
-    driver.get(URL)
+    driver.get("http://www.amazon.com/")
 
     element = driver.find_element_by_xpath('//*[@id="twotabsearchtextbox"]')
     element.send_keys(search_term)
@@ -96,12 +91,12 @@ def foo():
                 product = Product(name, price, prev_price, link)
                 if should_add:
                     products.append(product)
-                    print(products)
+                    # print(products)
                 counter = counter + 1
         page = page - 1
         if page == 0:
             break
-        print(page)
+        # print(page)
     run = 0
 
     for product in products:
@@ -129,8 +124,8 @@ def foo():
             data["Products"].append(prod.serialize())
         json.dump(data, json_file, sort_keys=True, indent=4)
 
-    print(json.dumps(chepest_product.serialize(), indent=4, sort_keys=True))
-    print(json.dumps(best_deal_product.serialize(), indent=4, sort_keys=True))
+    # print(json.dumps(chepest_product.serialize(), indent=4, sort_keys=True))
+    # print(json.dumps(best_deal_product.serialize(), indent=4, sort_keys=True))
 
     # chrome_options = webdriver.ChromeOptions()
     # chrome_options.binary_location = GOOGLE_CHROME_BIN
@@ -142,18 +137,16 @@ def foo():
     # # chrome_options.add_argument('--incognito')
     # # chrome_options.add_argument('--disable-gpu')
 
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--no-sandbox")
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    # chrome_options = webdriver.ChromeOptions()
+    # chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    # chrome_options.add_argument("--headless")
+    # chrome_options.add_argument("--no-sandbox")
+    # chrome_options.add_argument("--disable-dev-shm-usage")
 
+    # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
-    driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH, chrome_options=chrome_options)
-
-    driver.get(best_deal_product.link)
-    driver.find_element_by_tag_name('body').send_keys(Keys.COMMAND + 't')
+    # driver.get(best_deal_product.link)
+    # driver.find_element_by_tag_name('body').send_keys(Keys.COMMAND + 't')
 
     return jsonify(data)
 
