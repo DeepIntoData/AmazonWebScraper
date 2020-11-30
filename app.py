@@ -1,4 +1,5 @@
 from flask import Flask, request, render_template, jsonify
+import requests 
 import json
 import os
 import time
@@ -39,19 +40,18 @@ def foo():
     options = webdriver.ChromeOptions()
     options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
     #####################################
-    options.add_argument("--no-sandbox")
     options.add_argument('--headless')
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
     #####################################
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
     #driver = webdriver.Chrome("chromedriver.exe", options=options) ##UNCOMMENT FOR TESTING
     #####################################
 
+    time.sleep(10)
+
     driver.get(URL)
-    
-    time.sleep(5)
-    
     element = driver.find_element_by_xpath('//*[@id="twotabsearchtextbox"]')
     element.send_keys(search_term)
     element.send_keys(Keys.ENTER)
@@ -137,20 +137,20 @@ def foo():
     print(json.dumps(chepest_product.serialize(), indent=4, sort_keys=True))
     print(json.dumps(best_deal_product.serialize(), indent=4, sort_keys=True))
 
-    # options = webdriver.ChromeOptions()
-    # options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    # ##############################
-    # options.add_argument('--headless')
-    # options.add_argument("--no-sandbox")
-    # options.add_argument("--disable-dev-shm-usage")
-    # #options.add_argument("--disable-gpu")
-    # ##############################
-    # driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
-    # #driver = webdriver.Chrome("chromedriver.exe", options=options)
-    # ##############################
+    options = webdriver.ChromeOptions()
+    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    ##############################
+    options.add_argument('--headless')
+    options.add_argument("--no-sandbox")
+    options.add_argument("--disable-dev-shm-usage")
+    #options.add_argument("--disable-gpu")
+    ##############################
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options)
+    #driver = webdriver.Chrome("chromedriver.exe", options=options)
+    ##############################
 
-    # driver.get(best_deal_product.link)
-    # driver.find_element_by_tag_name('body').send_keys(Keys.COMMAND + 't')
+    driver.get(best_deal_product.link)
+    driver.find_element_by_tag_name('body').send_keys(Keys.COMMAND + 't')
 
     return jsonify(data)
 
