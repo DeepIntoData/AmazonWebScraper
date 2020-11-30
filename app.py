@@ -18,10 +18,6 @@ def index():
 @app.route('/get-text', methods=['GET', 'POST'])
 def foo():
 
-    print("")
-    print("#####################################")
-    start_time = time.time()
-
     bar = request.form['test']
     
     URL = "http://www.amazon.com/"
@@ -39,10 +35,6 @@ def foo():
     # GOOGLE_CHROME_BIN = '/app/.apt/usr/bin/google_chrome' #PATH SET ON HEROKU CONFIG_VARS
     # CHROMEDRIVER_PATH = '/app/.chromedriver/bin/chromedriver' #PATH SET ON HEROKU CONFIG_VARS
 
-    print("")
-    print("--- DRIVER STARTED ---")
-    print("--- %s seconds ---" % (time.time() - start_time))
-
     #####################################
     options = webdriver.ChromeOptions()
     options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
@@ -57,11 +49,6 @@ def foo():
     #####################################
 
     driver.get(URL)
-
-    print("")
-    print("--- SCRAPING... ---")
-    print("--- %s seconds ---" % (time.time() - start_time))
-    print("")
     
     time.sleep(5)
     
@@ -97,7 +84,7 @@ def foo():
                 # rating = 
                 try:
                     prime_element = i.find_element_by_class_name("a-icon-prime")
-                    #print(prime_element)
+                    print(prime_element)
                     prime = True
                 except:
                     Exception()
@@ -120,11 +107,6 @@ def foo():
         if page == 0:
             break
         print(page)
-
-    driver.quit()
-    print("")
-    print("--- DRIVER SUCCESS... STARTING SORTER ---")
-    print("--- %s seconds ---" % (time.time() - start_time))    
 
     run = 0
     for product in products:
@@ -152,8 +134,8 @@ def foo():
             data["Products"].append(prod.serialize())
         json.dump(data, json_file, sort_keys=True, indent=4)
 
-    # print(json.dumps(chepest_product.serialize(), indent=4, sort_keys=True))
-    # print(json.dumps(best_deal_product.serialize(), indent=4, sort_keys=True))
+    print(json.dumps(chepest_product.serialize(), indent=4, sort_keys=True))
+    print(json.dumps(best_deal_product.serialize(), indent=4, sort_keys=True))
 
     # options = webdriver.ChromeOptions()
     # options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
@@ -170,11 +152,6 @@ def foo():
     # driver.get(best_deal_product.link)
     # driver.find_element_by_tag_name('body').send_keys(Keys.COMMAND + 't')
 
-    print("")
-    print("--- SESSION COMPLETE ---")
-    print("--- %s seconds ---" % (time.time() - start_time))
-    print("")
-    print("#####################################")
     return jsonify(data)
 
 if __name__ == '__main__':
