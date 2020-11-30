@@ -3,13 +3,15 @@ import json
 import os
 import time
 #import random
-from seleniumwire import webdriver
+#from seleniumwire import webdriver
+from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 # from selenium.webdriver.support.ui import WebDriverWait
 # from selenium.webdriver.support import expected_conditions as EC
 # from selenium.webdriver.common.by import By
 from product import Product
 from utils import convert_price_toNumber
+from price_scraper import get_url
 
 app = Flask(__name__)
 
@@ -28,19 +30,21 @@ def foo():
 
     bar = request.form['test']
     
-    URL = "http://www.amazon.com/"
-    NUMBER_OF_PAGES_TO_SEARCH = 2
+    #URL = "http://www.amazon.com/"
+    NUMBER_OF_PAGES_TO_SEARCH = 3
     QUESTION_PRODUCT = "What are you looking for?\n:"
     PRODUCT_PATH = '//*[@id="search"]/div[1]/div[2]/div/span[3]/div[2]/div'
     #ELEMENT_ID = '//*[@id="twotabsearchtextbox"]'
-    ELEMENT_ID = "//input[@type='text'][@id='twotabsearchtextbox']"
+    #ELEMENT_ID = "//input[@type='text'][@id='twotabsearchtextbox']"
     search_term = str(bar)
+    URL = get_url(search_term)
 
     biggest_discount = 0.0
     lowest_price = 0.0
     chepest_product = Product("", "", "", "", "", "")
     best_deal_product = Product("", "", "", "", "", "")
-    search_terms = search_term.split(" ")
+    #search_terms = search_term.split(" ")
+    #search_terms = search_term.replace(" ","+")
 
     print("")
     print("--- DRIVER STARTED ---")
@@ -51,7 +55,7 @@ def foo():
 
     #####################################
     options = webdriver.ChromeOptions()
-    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN") #UNCOMMENT FOR DEPLOYMENT/COMMENT FOR TESTING
+    #options.binary_location = os.environ.get("GOOGLE_CHROME_BIN") #UNCOMMENT FOR DEPLOYMENT/COMMENT FOR TESTING
     #####################################
     options.add_argument("--no-sandbox")
     options.add_argument('--headless')
@@ -59,8 +63,8 @@ def foo():
     options.add_argument("--disable-gpu")
     options.add_argument("--incognito")
     #####################################
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options) #UNCOMMENT FOR DEPLOYMENT
-    #driver = webdriver.Chrome("D:\chromedriver.exe", options=options) ##UNCOMMENT FOR TESTING (SET DRIVERT PATH)
+    #driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options) #UNCOMMENT FOR DEPLOYMENT
+    driver = webdriver.Chrome("D:\chromedriver.exe", options=options) ##UNCOMMENT FOR TESTING (SET DRIVERT PATH)
     #####################################
 
     # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WIN64; x64) AppleWebKit/537.36 Chrome/87.0.4280.66 Safari.537,36'}
@@ -68,19 +72,19 @@ def foo():
     # proxies = {'https': random.choice(proxies_list)}
     # time.sleep(0.5 * random.random())
     
-    driver.header_overrides = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WIN64; x64) AppleWebKit/537.36 Chrome/87.0.4280.66 Safari.537,36'}
+    # driver.header_overrides = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WIN64; x64) AppleWebKit/537.36 Chrome/87.0.4280.66 Safari.537,36'}
 
     driver.get(URL)
-    time.sleep(5)
+    time.sleep(3)
 
     print("")
     print("--- SCRAPING... ---")
     print("--- %s seconds ---" % (time.time() - start_time))
     print("")
     
-    element = driver.find_element_by_xpath(ELEMENT_ID)
-    element.send_keys(search_term)
-    element.send_keys(Keys.ENTER)
+    # element = driver.find_element_by_xpath(ELEMENT_ID)
+    # element.send_keys(search_term)
+    # element.send_keys(Keys.ENTER)
 
     products = []
 
@@ -196,9 +200,8 @@ def foo():
     print("--- %s seconds ---" % (time.time() - start_time))
     print("")
     print("#####################################")
+    
     return jsonify(data)
-
-    return (driver.get(URL))
 
 if __name__ == '__main__':
     app.run(debug=True)

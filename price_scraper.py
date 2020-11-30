@@ -1,3 +1,8 @@
+def get_url(search_term):
+    template = 'https://www.amazon.com/s?k={}'
+    search_term = search_term.replace(' ', '+')
+    return template.format(search_term)
+
 # import requests 
 # import json
 # from selenium import webdriver
