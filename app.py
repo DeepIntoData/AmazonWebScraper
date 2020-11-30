@@ -4,6 +4,9 @@ import os
 import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.by import By
 from product import Product
 from utils import convert_price_toNumber
 
@@ -28,6 +31,7 @@ def foo():
     NUMBER_OF_PAGES_TO_SEARCH = 2
     QUESTION_PRODUCT = "What are you looking for?\n:"
     PRODUCT_PATH = '//*[@id="search"]/div[1]/div[2]/div/span[3]/div[2]/div'
+    ELEMENT_ID = '//*[@id="twotabsearchtextbox"]'
     search_term = str(bar)
 
     biggest_discount = 0.0
@@ -58,14 +62,13 @@ def foo():
 
     driver.get(URL)
     
-    time.sleep(5)
-
     print("")
     print("--- SCRAPING... ---")
     print("--- %s seconds ---" % (time.time() - start_time))
     print("")
     
-    element = driver.find_element_by_xpath('//*[@id="twotabsearchtextbox"]')
+    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, ELEMENT_ID)))
+    element = driver.find_element_by_xpath(ELEMENT_ID)
     element.send_keys(search_term)
     element.send_keys(Keys.ENTER)
 
