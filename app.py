@@ -4,9 +4,9 @@ import os
 import time
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.common.by import By
+# from selenium.webdriver.support.ui import WebDriverWait
+# from selenium.webdriver.support import expected_conditions as EC
+# from selenium.webdriver.common.by import By
 from product import Product
 from utils import convert_price_toNumber
 
@@ -28,10 +28,11 @@ def foo():
     bar = request.form['test']
     
     URL = "http://www.amazon.com/"
-    NUMBER_OF_PAGES_TO_SEARCH = 2
+    NUMBER_OF_PAGES_TO_SEARCH = 3
     QUESTION_PRODUCT = "What are you looking for?\n:"
     PRODUCT_PATH = '//*[@id="search"]/div[1]/div[2]/div/span[3]/div[2]/div'
-    ELEMENT_ID = '//*[@id="twotabsearchtextbox"]'
+    #ELEMENT_ID = '//*[@id="twotabsearchtextbox"]'
+    ELEMENT_ID = "//input[@type='text'][@id='twotabsearchtextbox']"
     search_term = str(bar)
 
     biggest_discount = 0.0
@@ -49,25 +50,25 @@ def foo():
 
     #####################################
     options = webdriver.ChromeOptions()
-    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN") #UNCOMMENT FOR DEPLOYMENT/COMMENT FOR TESTING
+    #options.binary_location = os.environ.get("GOOGLE_CHROME_BIN") #UNCOMMENT FOR DEPLOYMENT/COMMENT FOR TESTING
     #####################################
     options.add_argument("--no-sandbox")
     options.add_argument('--headless')
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
     #####################################
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options) #UNCOMMENT FOR DEPLOYMENT
-    #driver = webdriver.Chrome("D:\chromedriver.exe", options=options) ##UNCOMMENT FOR TESTING (SET DRIVERT PATH)
+    #driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options) #UNCOMMENT FOR DEPLOYMENT
+    driver = webdriver.Chrome("D:\chromedriver.exe", options=options) ##UNCOMMENT FOR TESTING (SET DRIVERT PATH)
     #####################################
 
     driver.get(URL)
-    
+    time.sleep(5)
+
     print("")
     print("--- SCRAPING... ---")
     print("--- %s seconds ---" % (time.time() - start_time))
     print("")
     
-    WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.XPATH, ELEMENT_ID)))
     element = driver.find_element_by_xpath(ELEMENT_ID)
     element.send_keys(search_term)
     element.send_keys(Keys.ENTER)
@@ -76,6 +77,8 @@ def foo():
 
     page = NUMBER_OF_PAGES_TO_SEARCH
 
+    print("--- PAGES SCRAPED ---")
+    print(page)
     while True:
         if page != 0:
             try:
@@ -185,6 +188,8 @@ def foo():
     print("")
     print("#####################################")
     return jsonify(data)
+
+    return (driver.get(URL))
 
 if __name__ == '__main__':
     app.run(debug=True)
