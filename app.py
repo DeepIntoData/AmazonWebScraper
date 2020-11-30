@@ -61,7 +61,12 @@ def foo():
     #driver = webdriver.Chrome("D:\chromedriver.exe", options=options) ##UNCOMMENT FOR TESTING (SET DRIVERT PATH)
     #####################################
 
-    driver.get(URL)
+    headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WIN64; x64) AppleWebKit/537.36 Chrome/87.0.4280.66 Safari.537,36'}
+    proxies_list = ["128.199.109.241:8080","113.53.230.195:3128","125.141.200.53:80","125.141.200.14:80","128.199.200.112:138","149.56.123.99:3128","128.199.200.112:80","125.141.200.39:80","134.213.29.202:4444"]
+    proxies = {'https': random.choice(proxies_list)}
+    time.sleep(0.5 * random.random())
+    
+    driver.get(URL,headers,proxies)
     time.sleep(3)
 
     print("")
