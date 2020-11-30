@@ -71,7 +71,7 @@ def foo():
     driver.header_overrides = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WIN64; x64) AppleWebKit/537.36 Chrome/87.0.4280.66 Safari.537,36'}
 
     driver.get(URL)
-    time.sleep(3)
+    time.sleep(5)
 
     print("")
     print("--- SCRAPING... ---")
