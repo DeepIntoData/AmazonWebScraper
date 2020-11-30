@@ -2,7 +2,8 @@ from flask import Flask, request, render_template, jsonify
 import json
 import os
 import time
-from selenium import webdriver
+#import random
+from seleniumwire import webdriver
 from selenium.webdriver.common.keys import Keys
 # from selenium.webdriver.support.ui import WebDriverWait
 # from selenium.webdriver.support import expected_conditions as EC
@@ -50,23 +51,26 @@ def foo():
 
     #####################################
     options = webdriver.ChromeOptions()
-    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN") #UNCOMMENT FOR DEPLOYMENT/COMMENT FOR TESTING
+    #options.binary_location = os.environ.get("GOOGLE_CHROME_BIN") #UNCOMMENT FOR DEPLOYMENT/COMMENT FOR TESTING
     #####################################
     options.add_argument("--no-sandbox")
     options.add_argument('--headless')
     options.add_argument("--disable-dev-shm-usage")
     options.add_argument("--disable-gpu")
+    options.add_argument("--incognito")
     #####################################
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options) #UNCOMMENT FOR DEPLOYMENT
-    #driver = webdriver.Chrome("D:\chromedriver.exe", options=options) ##UNCOMMENT FOR TESTING (SET DRIVERT PATH)
+    #driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options) #UNCOMMENT FOR DEPLOYMENT
+    driver = webdriver.Chrome("D:\chromedriver.exe", options=options) ##UNCOMMENT FOR TESTING (SET DRIVERT PATH)
     #####################################
 
-    headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WIN64; x64) AppleWebKit/537.36 Chrome/87.0.4280.66 Safari.537,36'}
-    proxies_list = ["128.199.109.241:8080","113.53.230.195:3128","125.141.200.53:80","125.141.200.14:80","128.199.200.112:138","149.56.123.99:3128","128.199.200.112:80","125.141.200.39:80","134.213.29.202:4444"]
-    proxies = {'https': random.choice(proxies_list)}
-    time.sleep(0.5 * random.random())
+    # headers = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WIN64; x64) AppleWebKit/537.36 Chrome/87.0.4280.66 Safari.537,36'}
+    # proxies_list = ["128.199.109.241:8080","113.53.230.195:3128","125.141.200.53:80","125.141.200.14:80","128.199.200.112:138","149.56.123.99:3128","128.199.200.112:80","125.141.200.39:80","134.213.29.202:4444"]
+    # proxies = {'https': random.choice(proxies_list)}
+    # time.sleep(0.5 * random.random())
     
-    driver.get(URL,headers,proxies)
+    driver.header_overrides = {'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WIN64; x64) AppleWebKit/537.36 Chrome/87.0.4280.66 Safari.537,36'}
+
+    driver.get(URL)
     time.sleep(3)
 
     print("")
