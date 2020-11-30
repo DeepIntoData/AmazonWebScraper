@@ -28,7 +28,7 @@ def foo():
     bar = request.form['test']
     
     URL = "http://www.amazon.com/"
-    NUMBER_OF_PAGES_TO_SEARCH = 3
+    NUMBER_OF_PAGES_TO_SEARCH = 2
     QUESTION_PRODUCT = "What are you looking for?\n:"
     PRODUCT_PATH = '//*[@id="search"]/div[1]/div[2]/div/span[3]/div[2]/div'
     #ELEMENT_ID = '//*[@id="twotabsearchtextbox"]'
@@ -62,7 +62,7 @@ def foo():
     #####################################
 
     driver.get(URL)
-    time.sleep(5)
+    time.sleep(3)
 
     print("")
     print("--- SCRAPING... ---")
