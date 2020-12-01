@@ -31,7 +31,7 @@ def scrape_amazon_search(search_term):
     
     #####################################
     options = webdriver.ChromeOptions()
-    #options.binary_location = os.environ.get("GOOGLE_CHROME_BIN") #UNCOMMENT FOR DEPLOYMENT/COMMENT FOR TESTING
+    options.binary_location = os.environ.get("GOOGLE_CHROME_BIN") #UNCOMMENT FOR DEPLOYMENT/COMMENT FOR TESTING
     #####################################
     options.add_argument("--no-sandbox")
     options.add_argument('--headless')
@@ -39,8 +39,8 @@ def scrape_amazon_search(search_term):
     options.add_argument("--disable-gpu")
     options.add_argument("--incognito")
     #####################################
-    #driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options) #UNCOMMENT FOR DEPLOYMENT
-    driver = webdriver.Chrome("D:\chromedriver.exe", options=options) ##UNCOMMENT FOR TESTING (SET DRIVERT PATH)
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), options=options) #UNCOMMENT FOR DEPLOYMENT
+    #driver = webdriver.Chrome("D:\chromedriver.exe", options=options) ##UNCOMMENT FOR TESTING (SET DRIVERT PATH)
     #####################################
 
     driver.get(URL)
