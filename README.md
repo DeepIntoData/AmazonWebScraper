@@ -1,5 +1,5 @@
 <h1 align="center">Amazon Web Scraper</h1>
-<p style="text-align:center">
+<p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0-blue.svg?cacheSeconds=2592000" />
   <a href="1" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
@@ -9,16 +9,16 @@
   </a>
 </p>
 
-><p style="text-align:center"> A Flask enabled Web Scraping Service to find best product deals on Amazon
+>A Flask enabled Web Scraping Service to find best product deals on Amazon
 ***
 
 ## ✨ Demo
 
 <p align="center">
-  <img width="700" align="center" src="https://raw.githubusercontent.com/Frozte/AmazonWebScraper/main/demo.PNG" alt="demo"/>
+  <img width="800" align="center" src="https://raw.githubusercontent.com/Frozte/AmazonWebScraper/main/demo.PNG" alt="demo"/>
 </p>
 
-Please visit the link 🔗[HERE](https://amazonwebscraper.herokuapp.com/) to try out the scrape for yourself. Please be patient as the process takes a bit to run in its current state.
+Visit the link 🔗[HERE](https://amazonwebscraper.herokuapp.com/) to try out the scrape for yourself. Please be patient as the process takes a bit to run in its current state.
 
 The output will be in a .json format, after which, the user may click or copy and paste the URL into their browser.
 
@@ -37,14 +37,14 @@ The output will be in a .json format, after which, the user may click or copy an
 ***
 ## ✔️ Prerequisites
 
-You will need to download a chromedriver.exe compatible with your version of Google Chrome. To check your chrome version, please go to Settings>About Chrome and note your version. Then proceed to this [link](https://chromedriver.chromium.org/) and download the driver specific to your version. Take note of the filepath of this driver for the steps in the Usage section.
+You will need to download a chromedriver.exe compatible with your version of Google Chrome. To check your chrome version, please navigate to 'Settings>About Chrome' and note your version. Then proceed to this [link](https://chromedriver.chromium.org/) and download the driver specific to your version. Take note of the filepath of this driver for the steps in the Usage section.
 
 Other prerequisites include...
 
 ```sh
-Flask > 1.1.2
-Selenium > 3.141.0
-Requests > 2.25.0
+Flask >= 1.1.2
+Selenium >= 3.141
+Requests >= 2.25
 ```
 ***
 
