@@ -22,7 +22,7 @@ def scrape_amazon_search(search_term):
     start_time = time.time()
 
     URL = get_url(search_term)
-    NUMBER_OF_PAGES_TO_SEARCH = 3
+    NUMBER_OF_PAGES_TO_SEARCH = 1
     PRODUCT_PATH = '//*[@id="search"]/div[1]/div[2]/div/span[3]/div[2]/div'
 
     print("")
