@@ -9,7 +9,7 @@
   </a>
 </p>
 
->A Flask enabled Web Scraping Service to find best product deals on Amazon
+>A Flask enabled Web Scraping Service to find the best product deals on Amazon
 ***
 
 ## ✨ Demo
