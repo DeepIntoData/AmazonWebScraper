@@ -1,4 +1,4 @@
-<h1 align="center">Amazon Web Scraper</h1>
+<h1>Amazon Web Scraper</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0-blue.svg?cacheSeconds=2592000" />
   <a href="1" target="_blank">
@@ -14,8 +14,8 @@
 
 ## ✨ Demo
 
-<p align="center">
-  <img width="800" align="center" src="https://raw.githubusercontent.com/Frozte/AmazonWebScraper/main/demo.PNG" alt="demo"/>
+<p>
+  <img src="https://raw.githubusercontent.com/Frozte/AmazonWebScraper/main/demo.PNG" alt="demo"/>
 </p>
 
 Visit the link 🔗[HERE](https://amazonwebscraper.herokuapp.com/) to try out the scrape for yourself. Please be patient as the process takes a bit to run in its current state.
@@ -69,7 +69,7 @@ python app.py
 While code is working properly, we would like to make the process run faster. Currently, the working deployment is scraping 1 page which we wish to change to 5. However, we are limited to 500MB and about 30 secs of runtime before Heroku timesout with it's infamous H12 error. The current code runs at an average of 20secs. We are already looking for ways to make this better. For those that wish to contribute, please create a pull request and we will include you as contributors
 
 ***
-## 📖 Author
+## 📖 Authors
 
 👤 **Deep Patel**
 
