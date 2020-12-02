@@ -90,7 +90,7 @@ Give a ⭐️ if this project helped you!
 ***
 ## 📝 License
 
-Copyright © 2020 [Deep Patel](https://github.com/Frozte).<br />
+Copyright © 2020 [Deep Patel](https://github.com/Frozte) & [@Joshua Coronel](https://github.com/joshuajonme).<br />
 This project is [MIT](https://github.com/Frozte/AmazonWebScraper/blob/main/LICENSE) licensed.
 
 ***
