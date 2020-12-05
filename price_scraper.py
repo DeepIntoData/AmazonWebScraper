@@ -94,7 +94,7 @@ def scrape_amazon_search(search_term):
                 # print("exception")
                 should_add = False
             
-            product = {"Name": name, "Price": price, "Previous price": prev_price, 
+            product = {"Search term": search_term, "Name": name, "Price": price, "Previous price": prev_price, 
                 "Discount": discount, "URL": link, "Prime product": prime}
             if should_add:
                 products.append(product)
