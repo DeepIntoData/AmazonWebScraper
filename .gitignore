@@ -1,0 +1,9 @@
+*.pyc
+.vscode/
+products.json
+__pycache__
+geckodriver.log
+.env
+
+## env
+/conda-env
